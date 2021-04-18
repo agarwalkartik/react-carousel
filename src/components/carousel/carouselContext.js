@@ -13,7 +13,6 @@ function carouselReducer(state, action) {
   if (!state) {
     return;
   }
-  console.log(action, state);
   switch (action.type) {
     case "toggleCategorySelection": {
       let selectedCategories = [...state.selectedCategories];
@@ -26,12 +25,11 @@ function carouselReducer(state, action) {
       } else {
         selectedCategories.push(action.payload.category);
       }
-      if (state.selectedCategories.length === categories.length) {
+      if (state.selectedCategories.length === state.categories.length) {
         isAllSelected = true;
       } else if (state.selectedCategories.length === 0) {
         isAllSelected = false;
       }
-      debugger;
       return {
         ...state,
         selectedCategories,
