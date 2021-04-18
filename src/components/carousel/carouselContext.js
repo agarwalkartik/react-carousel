@@ -10,9 +10,6 @@ products.forEach((product) => {
 const CarouselContext = createContext();
 
 function carouselReducer(state, action) {
-  if (!state) {
-    return;
-  }
   switch (action.type) {
     case "toggleCategorySelection": {
       let selectedCategories = [...state.selectedCategories];
@@ -25,9 +22,9 @@ function carouselReducer(state, action) {
       } else {
         selectedCategories.push(action.payload.category);
       }
-      if (state.selectedCategories.length === state.categories.length) {
+      if (selectedCategories.length === state.categories.length) {
         isAllSelected = true;
-      } else if (state.selectedCategories.length === 0) {
+      } else if (selectedCategories.length === 0) {
         isAllSelected = false;
       }
       return {
