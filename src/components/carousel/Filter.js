@@ -1,26 +1,30 @@
 import React from "react";
 
 import { FilterContainer, FilterButton } from "./FilterStyles";
-
-const Filter = ({
-  isAllSelected,
-  toggleAllSelection,
-  selectedCategories,
-  categories,
-  toggleCategorySelection,
-}) => {
+import { useCarousel } from "./carouselContext";
+const Filter = () => {
+  const { state, dispatch } = useCarousel();
   return (
     <FilterContainer>
-      <FilterButton isSelected={isAllSelected} onClick={toggleAllSelection}>
+      <FilterButton
+        isSelected={state.isAllSelected}
+        onClick={() => dispatch({ type: "toggleAllSelection" })}
+      >
         all
       </FilterButton>
-      {categories.map((category) => {
+      {state.categories.map((category, index) => {
         return (
           <FilterButton
+            key={index}
             isSelected={
-              selectedCategories.indexOf(category) >= 0 ? true : false
+              state.selectedCategories.indexOf(category) >= 0 ? true : false
             }
-            onClick={() => toggleCategorySelection(category)}
+            onClick={() =>
+              dispatch({
+                type: "toggleCategorySelection",
+                payload: { category },
+              })
+            }
           >
             {category}
           </FilterButton>
