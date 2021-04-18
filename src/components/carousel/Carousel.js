@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  CarouselContainer,
   LeftIcon,
   RightIcon,
   Item,
